@@ -1,0 +1,3 @@
+- check private IPs
+- push to github
+- more cards for extra large screens
