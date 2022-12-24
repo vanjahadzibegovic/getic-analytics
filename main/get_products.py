@@ -87,21 +87,26 @@ def write_products_to_db(db, products):
             product (list): Contains product related data (Name, price, stock...)
     """
     run_number = calculate_current_run_number(db)  # Current DB writing iteration
+    previous_product_ids = []
     for product in products:
-        total_sold = calculate_total_sold(db, product)  # Times product has been sold
-        product = Product(
-            product_id=product[0],
-            product_name=product[1],
-            category=product[2],
-            subcategory=product[3],
-            subcategory_id=product[4],
-            price=product[5],
-            stock=product[6],
-            total_sold=total_sold,
-            image=product[7],
-            run_number=run_number,
-        )
-        db.session.add(product)
+        if product[0] not in previous_product_ids:
+            total_sold = calculate_total_sold(
+                db, product
+            )  # Times product has been sold
+            product_row = Product(
+                product_id=product[0],
+                product_name=product[1],
+                category=product[2],
+                subcategory=product[3],
+                subcategory_id=product[4],
+                price=product[5],
+                stock=product[6],
+                total_sold=total_sold,
+                image=product[7],
+                run_number=run_number,
+            )
+            previous_product_ids.append(product[0])
+            db.session.add(product_row)
     db.session.commit()
 
 

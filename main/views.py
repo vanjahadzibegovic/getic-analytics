@@ -8,6 +8,13 @@ from main.get_products import (
     calculate_current_run_number,
     get_product_images,
 )
+from main.calculate_stats import calculate_total_items, calculate_total_sold
+
+
+@app.route("/calculate_total", methods=["GET"])
+def calculate_total():
+    total_sold = calculate_total_sold()
+    return str(total_sold)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -18,7 +25,15 @@ def index():
     ).order_by(Product.total_sold.desc())
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)
-    return render_template("index.html", title="Dashboard", products=products_page)
+    total_products = calculate_total_items()
+    total_sold = calculate_total_sold()
+    return render_template(
+        "index.html",
+        title="Dashboard",
+        products=products_page,
+        total_products=total_products,
+        total_sold=total_sold,
+    )
 
 
 @app.route("/get_products", methods=["GET"])

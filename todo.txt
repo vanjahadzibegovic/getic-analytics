@@ -1,3 +1,7 @@
-- check private IPs
-- push to github
-- more cards for extra large screens
+- sold total
+- protected routes
+
+- EC2 Scheduling
+- Get Products Scheduling
+
+check private IPs
