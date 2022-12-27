@@ -1,8 +1,24 @@
+from main import db
 from main.models import Product
 import requests
+from urllib3.exceptions import InsecureRequestWarning
 import json
 import random
 import os
+
+
+def request_proxy_list():
+    """
+    Makes a call to ProxyScrape's API to obtain a list of HTTPS proxies (Elite).
+
+        Returns:
+                proxies (list): Contains HTTPS proxies
+    """
+    url = f"https://api.proxyscrape.com/v2/?request=displayproxies&protocol=https&timeout=10000&country=all&ssl=all&anonymity=elite"
+    requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+    r = requests.get(url, verify=False)
+    proxies = r.text.split("\r\n")[:-1]
+    return proxies
 
 
 def request_products_from_api(proxies):
@@ -16,6 +32,7 @@ def request_products_from_api(proxies):
         Returns:
                 products (list): Contains data about each product
     """
+
     categories = [
         "outdoor-wireless",
         "home-office-networks",
@@ -34,8 +51,12 @@ def request_products_from_api(proxies):
         try:
             proxy_index = random.randint(0, len(proxies) - 1)
             proxy = {"https": proxies[proxy_index]}
+            print(proxy)
             for category in categories:
                 url = f"https://www.getic.com/api/preset-subcategory/{category}?limit=10000&inStock=0&variationId=cfbb89b0-7217-11eb-ed9f-fa163e4a2e20"
+                requests.packages.urllib3.disable_warnings(
+                    category=InsecureRequestWarning
+                )
                 r = requests.get(url, proxies=proxy, verify=False)
                 parsed_response = json.loads(r.text)
                 for product_group in parsed_response["content"]:
@@ -63,19 +84,6 @@ def request_products_from_api(proxies):
         except:
             print("Error, looking for another proxy")
     return products
-
-
-def request_proxy_list():
-    """
-    Makes a call to ProxyScrape's API to obtain a list of HTTPS proxies (Elite).
-
-        Returns:
-                proxies (list): Contains HTTPS proxies
-    """
-    url = f"https://api.proxyscrape.com/v2/?request=displayproxies&protocol=https&timeout=10000&country=all&ssl=all&anonymity=elite"
-    r = requests.get(url, verify=False)
-    proxies = r.text.split("\r\n")[:-1]
-    return proxies
 
 
 def write_products_to_db(db, products):

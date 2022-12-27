@@ -5,7 +5,8 @@ from main import db
 
 def calculate_total_items():
     """
-    Calculates the total number of products in the database (from the last run).
+    Calculates the total number of products in the database
+    by using database entries from the last run.
 
     Returns:
             total_products(int): Total number of products
@@ -18,7 +19,8 @@ def calculate_total_items():
 
 def calculate_total_sold():
     """
-    Calculates the total number of sold products.
+    Calculates the total number of sold products
+    by using database entries from the last run.
 
     Returns:
             total_sold (int): Total number of sold products
