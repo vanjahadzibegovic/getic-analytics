@@ -169,10 +169,13 @@ def get_product_images(db):
             db (SQLAlchemy object): Database instance
     """
     products = Product.query.distinct(Product.product_id).all()
+    print("Downloading images...")
     for product in products:
+        print(product.image)
         r = requests.get(product.image).content
         with open(
             os.path.join("main/static/img/", f"{product.product_id}.jpg"), "wb+"
         ) as file:
             file.write(r)
             file.close()
+    print("Images downloaded...")

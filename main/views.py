@@ -11,12 +11,6 @@ from main.get_products import (
 from main.calculate_stats import calculate_total_items, calculate_total_sold
 
 
-@app.route("/calculate_total", methods=["GET"])
-def calculate_total():
-    total_sold = calculate_total_sold()
-    return str(total_sold)
-
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     latest_run_number = calculate_current_run_number(db) - 1
@@ -34,17 +28,3 @@ def index():
         total_products=total_products,
         total_sold=total_sold,
     )
-
-
-@app.route("/get_products", methods=["GET"])
-def get_products():
-    proxies = request_proxy_list()
-    products = request_products_from_api(proxies)
-    write_products_to_db(db, products)
-    return "Product stats updated..."
-
-
-@app.route("/get_images", methods=["GET"])
-def get_images():
-    get_product_images(db)
-    return "Images downloaded..."
