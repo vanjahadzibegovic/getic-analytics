@@ -1,7 +1,3 @@
-- sold total
-- protected routes
-
-- EC2 Scheduling
-- Get Products Scheduling
-
-check private IPs
+- Add info which says which category/brand you are currently viewing 
+(e.g. Dashboard - All Products )
+and make stats refer to the current category/brand (Total Sold and others)

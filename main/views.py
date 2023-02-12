@@ -28,3 +28,45 @@ def index():
         total_products=total_products,
         total_sold=total_sold,
     )
+
+
+@app.route("/categories/<category>", methods=["GET", "POST"])
+def categories(category):
+    latest_run_number = calculate_current_run_number(db) - 1
+    latest_run_products = (
+        Product.query.filter(Product.run_number == latest_run_number)
+        .filter(Product.category == category)
+        .order_by(Product.total_sold.desc())
+    )
+    page = request.args.get("page", 1, type=int)
+    products_page = latest_run_products.paginate(page=page, per_page=78)
+    total_products = calculate_total_items()
+    total_sold = calculate_total_sold()
+    return render_template(
+        "index.html",
+        title="Dashboard",
+        products=products_page,
+        total_products=total_products,
+        total_sold=total_sold,
+    )
+
+
+@app.route("/brands/<brand>", methods=["GET", "POST"])
+def brands(brand):
+    latest_run_number = calculate_current_run_number(db) - 1
+    latest_run_products = (
+        Product.query.filter(Product.run_number == latest_run_number)
+        .filter(Product.brand == brand)
+        .order_by(Product.total_sold.desc())
+    )
+    page = request.args.get("page", 1, type=int)
+    products_page = latest_run_products.paginate(page=page, per_page=78)
+    total_products = calculate_total_items()
+    total_sold = calculate_total_sold()
+    return render_template(
+        "index.html",
+        title="Dashboard",
+        products=products_page,
+        total_products=total_products,
+        total_sold=total_sold,
+    )

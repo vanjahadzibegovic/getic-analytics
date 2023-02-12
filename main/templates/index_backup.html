@@ -62,38 +62,20 @@
                 <div id="collapseBrands" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/">All Brands</a>
-                        <a class="collapse-item" href="/brands/Teltonika">Teltonika</a>
-                        <a class="collapse-item" href="/brands/AXON">AXON</a>
-                        <a class="collapse-item" href="/brands/Huawei">Huawei</a>
-                        <a class="collapse-item" href="/brands/HikVision">HikVision</a>
-                        <a class="collapse-item" href="/brands/Iskra">Iskra</a>
-                        <a class="collapse-item" href="/brands/ZTE">ZTE</a>
-                        <a class="collapse-item" href="/brands/Milesight">Milesight</a>
-                        <a class="collapse-item" href="/brands/MikroTik">MikroTik</a>
-                        <a class="collapse-item" href="/brands/IMILAB">IMILAB</a>
-                        <a class="collapse-item" href="/brands/EFB-ELEKTRONIK">EFB-ELEKTRONIK</a>
-                        <a class="collapse-item" href="/brands/Western Digital">Western Digital</a>
-                        <a class="collapse-item" href="/brands/QuWireless">QuWireless</a>
-                        <a class="collapse-item" href="/brands/Ubiquiti">Ubiquiti</a>
-                        <a class="collapse-item" href="/brands/AmpliFi">AmpliFi</a>
-                        <a class="collapse-item" href="/brands/OEM">OEM</a>
-                        <a class="collapse-item" href="/brands/Haylou">Haylou</a>
-                        <a class="collapse-item" href="/brands/Mimosa">Mimosa</a>
-                        <a class="collapse-item" href="/brands/Alcatel">Alcatel</a>
-                        <a class="collapse-item" href="/brands/Jirous">Jirous</a>
-                        <a class="collapse-item" href="/brands/RF Elements">RF Elements</a>
-                        <a class="collapse-item" href="/brands/Cambium">Cambium</a>
-                        <a class="collapse-item" href="/brands/Xiaomi">Xiaomi</a>
-                        <a class="collapse-item" href="/brands/Quectel">Quectel</a>
-                        <a class="collapse-item" href="/brands/Alfa Network">Alfa Network</a>
-                        <a class="collapse-item" href="/brands/Ruijie">Ruijie</a>
-                        <a class="collapse-item" href="/brands/Zyxel">Zyxel</a>
-                        <a class="collapse-item" href="/brands/Stalflex">Stalflex</a>
-                        <a class="collapse-item" href="/brands/Samsung">Samsung</a>
-                        <a class="collapse-item" href="/brands/Seagate">Seagate</a>
-                        <a class="collapse-item" href="/brands/Cyberteam">Cyberteam</a>
-                        <a class="collapse-item" href="/brands/Vention">Vention</a>
+                        <a class="collapse-item" href="#">MikroTik</a>
+                        <a class="collapse-item" href="#">Ubiquiti</a>
+                        <a class="collapse-item" href="#">Teltonika</a>
+                        <a class="collapse-item" href="#">Ruijie</a>
+                        <a class="collapse-item" href="#">Milesight</a>
+                        <a class="collapse-item" href="#">Huawei</a>
+                        <a class="collapse-item" href="#">Alfa</a>
+                        <a class="collapse-item" href="#">Cambium</a>
+                        <a class="collapse-item" href="#">QuWireless</a>
+                        <a class="collapse-item" href="#">Mimosa</a>
+                        <a class="collapse-item" href="#">HikVision</a>
+                        <a class="collapse-item" href="#">Xiaomi</a>
+                        <a class="collapse-item" href="#">RF Elements</a>
+                        <a class="collapse-item" href="#">Zyxel</a>
                     </div>
                 </div>
             </li>
@@ -106,18 +88,17 @@
                 <div id="collapseCategories" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/">All Categories</a>
-                        <a class="collapse-item" href="/categories/outdoor-wireless">Outdoor Wireless</a>
-                        <a class="collapse-item" href="/categories/home-office-networks">Home and Office Networks</a>
-                        <a class="collapse-item" href="/categories/lte-products">LTE Products</a>
-                        <a class="collapse-item" href="/categories/fiber-networks">Fiber Networks</a>
-                        <a class="collapse-item" href="/categories/security-systems">Security Systems</a>
-                        <a class="collapse-item" href="/categories/iot-products">IoT Solutions</a>
-                        <a class="collapse-item" href="/categories/fleet-management">Fleet Management</a>
-                        <a class="collapse-item" href="/categories/cables-and-cabinets">Cables and Cabinets</a>
-                        <a class="collapse-item" href="/categories/electrical-equipment">Electrical Equipment</a>
-                        <a class="collapse-item" href="/categories/mounts-and-brackets">Mounts and Brackets</a>
-                        <a class="collapse-item" href="/categories/gadgets">Gadgets</a>
+                        <a class="collapse-item" href="#">Outdoor Wireless</a>
+                        <a class="collapse-item" href="#">Home and Office Networks</a>
+                        <a class="collapse-item" href="#">LTE Products</a>
+                        <a class="collapse-item" href="#">Fiber Networks</a>
+                        <a class="collapse-item" href="#">Security Systems</a>
+                        <a class="collapse-item" href="#">IoT Solutions</a>
+                        <a class="collapse-item" href="#">Fleet Management</a>
+                        <a class="collapse-item" href="#">Cables and Cabinets</a>
+                        <a class="collapse-item" href="#">Electrical Equipment</a>
+                        <a class="collapse-item" href="#">Mounts and Brackets</a>
+                        <a class="collapse-item" href="#">Gadgets</a>
                     </div>
                 </div>
             </li>
@@ -329,12 +310,11 @@
                         <div class="col-xl-2 col-md-6 my-2" style="border: none;">
                             <!-- Basic Card Example -->
                             <div class="card">
-                                <img class="card-img-top" src="/static/img/{{ product.product_id }}.jpg"
+                                <img class="card-img-top" src="static/img/{{ product.product_id }}.jpg"
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name.decode() }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days:
-                                        <br>Total
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days: <br>Total
                                         sold: {{ product.total_sold }}
                                     </p>
                                 </div>
@@ -346,12 +326,11 @@
                         <div class="col-xl-2 col-md-6 my-2" style="border: none;">
                             <!-- Basic Card Example -->
                             <div class="card">
-                                <img class="card-img-top" src="/static/img/{{ product.product_id }}.jpg"
+                                <img class="card-img-top" src="static/img/{{ product.product_id }}.jpg"
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.product_name }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days:
-                                        <br>Total
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days: <br>Total
                                         sold: {{ product.total_sold }}
                                     </p>
                                 </div>

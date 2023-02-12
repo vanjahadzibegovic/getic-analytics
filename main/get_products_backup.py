@@ -64,7 +64,6 @@ def request_products_from_api(proxies):
                     subcategory_id = product_group["id"]
                     for product in product_group["products"]:
                         product_name = product["title"]
-                        brand = product["brand"]
                         price = str(product["prices"][0]["prices"][0]["price"])
                         stock = str(product["expectedAmount"])
                         image = f'https://www.getic.com{product["images"][0]["variants"][0]["path"]}'
@@ -73,7 +72,6 @@ def request_products_from_api(proxies):
                             [
                                 product_id,
                                 product_name,
-                                brand,
                                 category,
                                 subcategory,
                                 subcategory_id,
@@ -106,14 +104,13 @@ def write_products_to_db(db, products):
             product_row = Product(
                 product_id=product[0],
                 product_name=product[1],
-                brand=product[2],
-                category=product[3],
-                subcategory=product[4],
-                subcategory_id=product[5],
-                price=product[6],
-                stock=product[7],
+                category=product[2],
+                subcategory=product[3],
+                subcategory_id=product[4],
+                price=product[5],
+                stock=product[6],
                 total_sold=total_sold,
-                image=product[8],
+                image=product[7],
                 run_number=run_number,
             )
             previous_product_ids.append(product[0])
