@@ -1,3 +1,5 @@
 - Add info which says which category/brand you are currently viewing 
 (e.g. Dashboard - All Products )
 and make stats refer to the current category/brand (Total Sold and others)
+
+- Disable hide navbar on scroll option
