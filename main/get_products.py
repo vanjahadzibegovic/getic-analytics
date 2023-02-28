@@ -155,10 +155,10 @@ def calculate_total_sold(db, product):
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
         last_product_entry = product_entries_db[-1]
-        if last_product_entry.stock <= int(product[6]):
+        if last_product_entry.stock <= int(product[7]):
             return last_product_entry.total_sold
         total_sold = last_product_entry.total_sold + (
-            last_product_entry.stock - int(product[6])
+            last_product_entry.stock - int(product[7])
         )
         return total_sold
     return 0  # If no product entry in the database, return 0
