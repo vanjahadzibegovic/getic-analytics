@@ -142,12 +142,12 @@
                 </a>
                 <div id="CollapseSold" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/total-highest/">Total: highest first</a>
-                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/total-lowest/">Total: lowest first</a>
-                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/thirty-days-highest/">30 Days: highest
-                            first</a>
-                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/thirty-days-lowest/">30 Days: lowest
-                            first</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/total-highest/">Most Sold - All Time</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/total-lowest/">Least Sold - All Time</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/thirty-days-highest/">Most Sold - 30
+                            Days</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/thirty-days-lowest/">Least Sold - 30
+                            Days</a>
                     </div>
                 </div>
             </li>
@@ -159,8 +159,8 @@
                 </a>
                 <div id="CollapsePrice" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Price: highest first</a>
-                        <a class="collapse-item" href="#">Price: lowest first</a>
+                        <a class="collapse-item" href="#">Most Expensive</a>
+                        <a class="collapse-item" href="#">Least Expensive</a>
                     </div>
                 </div>
             </li>
@@ -240,7 +240,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800 ml-1"><b>{{ category }}</b></h1>
+                        <h1 class="h3 mb-0 text-gray-800 ml-1"><b>{{ product_type }}</b></h1>
                     </div>
 
 
@@ -326,7 +326,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-4 ml-1">
-                        <h1 class="h5 mb-0 text-gray-800">Sorted by: {{ sort }}</h1>
+                        <h1 class="h5 mb-0 text-gray-800">Products ({{ sort_type }}):</h1>
                     </div>
 
                     <!-- Content Row -->

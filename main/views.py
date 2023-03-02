@@ -11,7 +11,8 @@ from main.get_products import (
 from main.calculate_stats import (
     calculate_total_items,
     calculate_total_sold,
-    get_category,
+    map_category,
+    map_sort,
 )
 
 
@@ -29,7 +30,8 @@ def index():
         "index.html",
         title="Dashboard",
         base="categories",
-        category="All Products",
+        product_type=map_category("all-products"),
+        sort_type=map_sort("total-highest"),
         filter="all-products",
         sort="total-highest",
         products=products_page,
@@ -71,7 +73,8 @@ def categories(filter, sort):
         "index.html",
         title="Dashboard",
         base="categories",
-        category=get_category(filter),
+        product_type=map_category(filter),
+        sort_type=map_sort(sort),
         filter=filter,
         sort=sort,
         products=products_page,
@@ -103,7 +106,8 @@ def brands(filter, sort):
         "index.html",
         title="Dashboard",
         base="brands",
-        category=filter,
+        product_type=filter,
+        sort_type=map_sort(sort),
         filter=filter,
         sort=sort,
         products=products_page,

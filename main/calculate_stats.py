@@ -29,8 +29,9 @@ def calculate_total_sold(products):
     return total_sold
 
 
-def get_category(filter):
+def map_category(filter):
     category_mapping = {
+        "all-products": "All Products",
         "outdoor-wireless": "Outdoor Wireless",
         "home-office-networks": "Home and Office Networks",
         "lte-products": "LTE Products",
@@ -44,3 +45,13 @@ def get_category(filter):
         "gadgets": "Gadgets",
     }
     return category_mapping[filter]
+
+
+def map_sort(sort):
+    sort_mapping = {
+        "total-highest": "Most Sold - All Time",
+        "total-lowest": "Least Sold - All Time",
+        "thirty-days-highest": "Most Sold - 30 Days",
+        "thirty-days-lowest": "Least Sold - 30 Days",
+    }
+    return sort_mapping[sort]
