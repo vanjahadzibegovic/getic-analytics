@@ -54,6 +54,29 @@ def categories(filter, sort):
             latest_run_products = Product.query.filter(
                 Product.run_number == latest_run_number
             ).order_by(Product.total_sold.asc())
+
+    elif sort == "price-highest":
+        if filter != "all-products":
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.category == filter)
+                .order_by(Product.price.desc())
+            )
+        else:
+            latest_run_products = Product.query.filter(
+                Product.run_number == latest_run_number
+            ).order_by(Product.price.desc())
+    elif sort == "price-lowest":
+        if filter != "all-products":
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.category == filter)
+                .order_by(Product.price.asc())
+            )
+        else:
+            latest_run_products = Product.query.filter(
+                Product.run_number == latest_run_number
+            ).order_by(Product.price.asc())
     else:
         if filter != "all-products":
             latest_run_products = (
@@ -65,6 +88,7 @@ def categories(filter, sort):
             latest_run_products = Product.query.filter(
                 Product.run_number == latest_run_number
             ).order_by(Product.total_sold.desc())
+
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)
     total_products = calculate_total_items(latest_run_products)
@@ -91,6 +115,18 @@ def brands(filter, sort):
             Product.query.filter(Product.run_number == latest_run_number)
             .filter(Product.brand == filter)
             .order_by(Product.total_sold.asc())
+        )
+    elif sort == "price-highest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.price.desc())
+        )
+    elif sort == "price-lowest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.price.asc())
         )
     else:
         latest_run_products = (

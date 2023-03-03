@@ -53,5 +53,7 @@ def map_sort(sort):
         "total-lowest": "Least Sold - All Time",
         "thirty-days-highest": "Most Sold - 30 Days",
         "thirty-days-lowest": "Least Sold - 30 Days",
+        "price-highest": "Most Expensive",
+        "price-lowest": "Least Expensive",
     }
     return sort_mapping[sort]
