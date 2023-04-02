@@ -25,7 +25,7 @@ def calculate_total_sold(products):
     """
     total_sold = 0
     for product in products.all():
-        total_sold += product.total_sold
+        total_sold += product.sold_all_time
     return total_sold
 
 

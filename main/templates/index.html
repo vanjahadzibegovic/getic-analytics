@@ -148,6 +148,10 @@
                             Days</a>
                         <a class="collapse-item" href="/{{ base }}/{{ filter }}/thirty-days-lowest/">Least Sold - 30
                             Days</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/seven-days-highest/">Most Sold - 7
+                            Days</a>
+                        <a class="collapse-item" href="/{{ base }}/{{ filter }}/seven-days-lowest/">Least Sold - 7
+                            Days</a>
                     </div>
                 </div>
             </li>
@@ -343,9 +347,10 @@
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name.decode() }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days:
-                                        <br>Total
-                                        sold: {{ product.total_sold }}
+                                    <p class="card-text">Price: {{ product.price }} €<br><br>Sold in 7 days: {{
+                                        product.sold_seven_days }}<br>Sold in 30 days: {{
+                                        product.sold_thirty_days }}<br><br>Total
+                                        sold: {{ product.sold_all_time }}
                                     </p>
                                 </div>
                             </div>
@@ -360,9 +365,10 @@
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.product_name }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days:
-                                        <br>Total
-                                        sold: {{ product.total_sold }}
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days: {{
+                                        product.sold_thirty_days }}<br>Sold in 7 days: {{ product.sold_seven_days
+                                        }}<br>Total
+                                        sold: {{ product.sold_all_time }}
                                     </p>
                                 </div>
                             </div>

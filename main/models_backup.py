@@ -14,12 +14,10 @@ class Product(db.Model):
     subcategory_id = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    sold_all_time = db.Column(db.Integer, nullable=False)
-    sold_thirty_days = db.Column(db.Integer, nullable=False)
-    sold_seven_days = db.Column(db.Integer, nullable=False)
+    total_sold = db.Column(db.Integer, nullable=False)
     image = db.Column(db.String(400), nullable=False)
     run_number = db.Column(db.Integer, nullable=False)
     time_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     def __repr__(self):
-        return f"Product('{self.id}', '{self.product_name}', '{self.brand}', '{self.product_id}', '{self.category}', '{self.subcategory}', '{self.price}', '{self.stock}', '{self.sold_all_time}', '{self.sold_thirty_days}', '{self.sold_seven_days}', '{self.run_number}', '{self.time_created}')"
+        return f"Product('{self.id}', '{self.product_name}', '{self.brand}', '{self.product_id}', '{self.category}', '{self.subcategory}', '{self.price}', '{self.stock}', '{self.total_sold}', '{self.run_number}', '{self.time_created}')"

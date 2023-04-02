@@ -101,15 +101,9 @@ def write_products_to_db(db, products):
     previous_product_ids = []
     for product in products:
         if product[0] not in previous_product_ids:
-            sold_all_time = calculate_product_all_time_sold(
+            total_sold = calculate_product_total_sold(
                 db, product
             )  # Times product has been sold
-            sold_thirty_days = calculate_product_timeperiod_sold(
-                db, product, 30
-            )  # Times product has been sold in 30 days
-            sold_seven_days = calculate_product_timeperiod_sold(
-                db, product, 7
-            )  # Times product has been sold in 7 days
             product_row = Product(
                 product_id=product[0],
                 product_name=product[1],
@@ -119,9 +113,7 @@ def write_products_to_db(db, products):
                 subcategory_id=product[5],
                 price=product[6],
                 stock=product[7],
-                sold_all_time=sold_all_time,
-                sold_thirty_days=sold_thirty_days,
-                sold_seven_days=sold_seven_days,
+                total_sold=total_sold,
                 image=product[8],
                 run_number=run_number,
             )
@@ -150,7 +142,7 @@ def calculate_current_run_number(db):
     return 1  # If there are no products in the database, returns 1
 
 
-def calculate_product_all_time_sold(db, product):
+def calculate_product_total_sold(db, product):
     """
     Calculates how many times the product has been sold.
 
@@ -159,35 +151,34 @@ def calculate_product_all_time_sold(db, product):
                 product (list): Contains product related data (Name, price, stock...)
 
         Returns:
-                sold_all_time (int): Number of times the product has been sold
+                total_sold (int): Number of times the product has been sold
     """
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
         last_product_entry = product_entries_db[-1]
         if last_product_entry.stock <= int(product[7]):
-            return last_product_entry.sold_all_time
-        sold_all_time = last_product_entry.sold_all_time + (
+            return last_product_entry.total_sold
+        total_sold = last_product_entry.total_sold + (
             last_product_entry.stock - int(product[7])
         )
-        return sold_all_time
+        return total_sold
     return 0  # If no product entry in the database, return 0
 
 
-def calculate_product_timeperiod_sold(db, product, days):
-    product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
+def calculate_product_timeperiod_sold(db, product_id, days):
+    product_entries_db = Product.query.filter(Product.product_id == product_id).all()
     if product_entries_db:
         last_product_entry = product_entries_db[-1]
         end_date = last_product_entry.time_created.date()
         start_date = end_date - timedelta(days)
-        end_date_sold = last_product_entry.sold_all_time
-        sold_in_days = 0
+        end_date_sold = last_product_entry.total_sold
+        sold_in_days = "N/A"
         for element in product_entries_db:
             if element.time_created.date() == start_date:
-                start_date_sold = element.sold_all_time
-                sold_in_days = end_date_sold - start_date_sold
+                start_date_sold = element.total_sold
+                sold_in_days = str(end_date_sold - start_date_sold)
                 break
-        return sold_in_days
-    return 0
+    return sold_in_days
 
 
 def get_product_images(db):

@@ -21,7 +21,7 @@ def index():
     latest_run_number = calculate_current_run_number(db) - 1
     latest_run_products = Product.query.filter(
         Product.run_number == latest_run_number
-    ).order_by(Product.total_sold.desc())
+    ).order_by(Product.sold_all_time.desc())
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)
     total_products = calculate_total_items(latest_run_products)
@@ -48,13 +48,36 @@ def categories(filter, sort):
             latest_run_products = (
                 Product.query.filter(Product.run_number == latest_run_number)
                 .filter(Product.category == filter)
-                .order_by(Product.total_sold.asc())
+                .order_by(Product.sold_all_time.asc())
             )
         else:
             latest_run_products = Product.query.filter(
                 Product.run_number == latest_run_number
-            ).order_by(Product.total_sold.asc())
-
+            ).order_by(Product.sold_all_time.asc())
+    elif sort == "seven-days-highest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.category == filter)
+            .order_by(Product.sold_seven_days.desc())
+        )
+    elif sort == "seven-days-lowest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.category == filter)
+            .order_by(Product.sold_seven_days.asc())
+        )
+    elif sort == "thirty-days-highest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.category == filter)
+            .order_by(Product.sold_thirty_days.desc())
+        )
+    elif sort == "thirty-days-lowest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.category == filter)
+            .order_by(Product.sold_thirty_days.asc())
+        )
     elif sort == "price-highest":
         if filter != "all-products":
             latest_run_products = (
@@ -82,12 +105,12 @@ def categories(filter, sort):
             latest_run_products = (
                 Product.query.filter(Product.run_number == latest_run_number)
                 .filter(Product.category == filter)
-                .order_by(Product.total_sold.desc())
+                .order_by(Product.sold_all_time.desc())
             )
         else:
             latest_run_products = Product.query.filter(
                 Product.run_number == latest_run_number
-            ).order_by(Product.total_sold.desc())
+            ).order_by(Product.sold_all_time.desc())
 
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)
@@ -114,7 +137,31 @@ def brands(filter, sort):
         latest_run_products = (
             Product.query.filter(Product.run_number == latest_run_number)
             .filter(Product.brand == filter)
-            .order_by(Product.total_sold.asc())
+            .order_by(Product.sold_all_time.asc())
+        )
+    elif sort == "seven-days-highest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.sold_seven_days.desc())
+        )
+    elif sort == "seven-days-lowest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.sold_seven_days.asc())
+        )
+    elif sort == "thirty-days-highest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.sold_thirty_days.desc())
+        )
+    elif sort == "thirty-days-lowest":
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.brand == filter)
+            .order_by(Product.sold_thirty_days.asc())
         )
     elif sort == "price-highest":
         latest_run_products = (
@@ -132,7 +179,7 @@ def brands(filter, sort):
         latest_run_products = (
             Product.query.filter(Product.run_number == latest_run_number)
             .filter(Product.brand == filter)
-            .order_by(Product.total_sold.desc())
+            .order_by(Product.sold_all_time.desc())
         )
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)

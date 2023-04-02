@@ -7,7 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 app = Flask(__name__)
 app.config[
     "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://postgres:smitSmece@localhost/getic_analytics"
+] = "postgresql://postgres:smitSmece@localhost/getic_analytics_new"
 db = SQLAlchemy(app)
 scheduler = BackgroundScheduler(daemon=True)
 # bcrypt = Bcrypt(app)

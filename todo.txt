@@ -1,5 +1,10 @@
-- Add info which says which category/brand you are currently viewing 
-(e.g. Dashboard - All Products )
-and make stats refer to the current category/brand (Total Sold and others)
-
+- Dodati komentare na nove funkcije (sortiranje)
+- Dodati mogucnost izbora scrapeanja sa ili bez proxyja
+- Dodati total products sold 30 i 7 days (gornji dashboard)
+- Dodati sort za Most/Least Sold - 7 Days
+- Opet skinut sve slike
+- Opet namjestiti scheduler
+- Dodati info za first scrape datum
 - Disable hide navbar on scroll option
+- Search
+- Authentication
