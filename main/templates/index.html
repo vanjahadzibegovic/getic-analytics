@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div>Getic Analytics</div>
             </a>
 
@@ -40,9 +40,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                <div class="nav-link">
+                    <span>Tracking since: {{ first_run_date }}</span>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -168,6 +168,7 @@
                     </div>
                 </div>
             </li>
+
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -297,7 +298,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Items Sold (30 Days)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ thirty_days_sold }}
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -316,7 +318,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Items Sold (7 Days)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ seven_days_sold }}
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -347,9 +350,9 @@
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name.decode() }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br><br>Sold in 7 days: {{
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 7 days: {{
                                         product.sold_seven_days }}<br>Sold in 30 days: {{
-                                        product.sold_thirty_days }}<br><br>Total
+                                        product.sold_thirty_days }}<br>Total
                                         sold: {{ product.sold_all_time }}
                                     </p>
                                 </div>
@@ -365,9 +368,10 @@
                                     alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.product_name }}</h5>
-                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 30 days: {{
-                                        product.sold_thirty_days }}<br>Sold in 7 days: {{ product.sold_seven_days
-                                        }}<br>Total
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 7 days: {{
+                                        product.sold_seven_days
+                                        }}<br>Sold in 30 days: {{
+                                        product.sold_thirty_days }}<br>Total
                                         sold: {{ product.sold_all_time }}
                                     </p>
                                 </div>

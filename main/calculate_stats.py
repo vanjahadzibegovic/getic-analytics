@@ -29,6 +29,34 @@ def calculate_total_sold(products):
     return total_sold
 
 
+def calculate_sold_thirty_days(products):
+    """
+    Calculates the total number of products sold in the last thirty days
+    by using database entries from the last run.
+
+    Returns:
+            thirty_days_sold (int): Number of products sold in thirty days
+    """
+    thirty_days_sold = 0
+    for product in products.all():
+        thirty_days_sold += product.sold_thirty_days
+    return thirty_days_sold
+
+
+def calculate_sold_seven_days(products):
+    """
+    Calculates the total number of products sold in the last seven days
+    by using database entries from the last run.
+
+    Returns:
+            seven_days_sold (int): Number of products sold in seven days
+    """
+    seven_days_sold = 0
+    for product in products.all():
+        seven_days_sold += product.sold_seven_days
+    return seven_days_sold
+
+
 def map_category(filter):
     category_mapping = {
         "all-products": "All Products",
@@ -53,6 +81,8 @@ def map_sort(sort):
         "total-lowest": "Least Sold - All Time",
         "thirty-days-highest": "Most Sold - 30 Days",
         "thirty-days-lowest": "Least Sold - 30 Days",
+        "seven-days-highest": "Most Sold - 7 Days",
+        "seven-days-lowest": "Least Sold - 7 Days",
         "price-highest": "Most Expensive",
         "price-lowest": "Least Expensive",
     }

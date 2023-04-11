@@ -22,10 +22,10 @@ def request_proxy_list():
     return proxies
 
 
-def request_products_from_api(proxies):
+def request_products_from_api(proxies=None):
     """
     Makes a call to Getic's API for each product category to get the product data.
-    It makes a request through a random proxy server to prevent being blocked.
+    If proxies are provided in the function call, requests will be made through them.
 
         Parameters:
                 proxies (list): Contains HTTPS proxies
@@ -50,15 +50,19 @@ def request_products_from_api(proxies):
     products = []
     while True:
         try:
-            proxy_index = random.randint(0, len(proxies) - 1)
-            proxy = {"https": proxies[proxy_index]}
-            print(proxy)
+            if proxies is not None:
+                proxy_index = random.randint(0, len(proxies) - 1)
+                proxy = {"https": proxies[proxy_index]}
+                print(proxy)
             for category in categories:
                 url = f"https://www.getic.com/api/preset-subcategory/{category}?limit=10000&inStock=0&variationId=cfbb89b0-7217-11eb-ed9f-fa163e4a2e20"
                 requests.packages.urllib3.disable_warnings(
                     category=InsecureRequestWarning
                 )
-                r = requests.get(url, proxies=proxy, verify=False)
+                if proxies is not None:
+                    r = requests.get(url, proxies=proxy, verify=False)
+                else:
+                    r = requests.get(url, verify=False)
                 parsed_response = json.loads(r.text)
                 for product_group in parsed_response["content"]:
                     subcategory = product_group["title"]
@@ -174,6 +178,17 @@ def calculate_product_all_time_sold(db, product):
 
 
 def calculate_product_timeperiod_sold(db, product, days):
+    """
+    Calculates how many times the product has been sold in the specified time period.
+
+        Parameters:
+                db (SQLAlchemy object): Database instance
+                product (list): Contains product related data (Name, price, stock...)
+                days (int): Specified time period in days
+
+        Returns:
+                sold_in_days (int): Number of times the product has been sold
+    """
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
         last_product_entry = product_entries_db[-1]
