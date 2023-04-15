@@ -114,6 +114,8 @@ def write_products_to_db(db, products):
             sold_seven_days = calculate_product_timeperiod_sold(
                 db, product, 7
             )  # Times product has been sold in 7 days
+            print(f"SOLD SEVEN DAYS ON WRITE: {sold_seven_days}")
+            print()
             product_row = Product(
                 product_id=product[0],
                 product_name=product[1],
@@ -192,16 +194,21 @@ def calculate_product_timeperiod_sold(db, product, days):
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
         last_product_entry = product_entries_db[-1]
+        print(f"PRODUCT NAME: {last_product_entry.product_name}")
         end_date = last_product_entry.time_created.date()
+        print(f"END DATE: {end_date}")
+
         start_date = end_date - timedelta(days)
+        print(f"START DATE: {start_date}")
         end_date_sold = last_product_entry.sold_all_time
+        print(end_date_sold)
         sold_in_days = 0
         for element in product_entries_db:
             if element.time_created.date() == start_date:
                 start_date_sold = element.sold_all_time
                 sold_in_days = end_date_sold - start_date_sold
-                break
-        return sold_in_days
+                print(f"SOLD IN DAYS: {sold_in_days}")
+                return sold_in_days
     return 0
 
 
