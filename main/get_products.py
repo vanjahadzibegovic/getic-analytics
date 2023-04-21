@@ -5,7 +5,7 @@ from urllib3.exceptions import InsecureRequestWarning
 import json
 import random
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 
 def request_proxy_list():
@@ -108,14 +108,14 @@ def write_products_to_db(db, products):
             sold_all_time = calculate_product_all_time_sold(
                 db, product
             )  # Times product has been sold
+            sold_seven_days = calculate_product_timeperiod_sold(
+                db, product, sold_all_time, 7
+            )  # Times product has been sold in 7 days
+            """
             sold_thirty_days = calculate_product_timeperiod_sold(
                 db, product, 30
             )  # Times product has been sold in 30 days
-            sold_seven_days = calculate_product_timeperiod_sold(
-                db, product, 7
-            )  # Times product has been sold in 7 days
-            print(f"SOLD SEVEN DAYS ON WRITE: {sold_seven_days}")
-            print()
+            """
             product_row = Product(
                 product_id=product[0],
                 product_name=product[1],
@@ -126,7 +126,7 @@ def write_products_to_db(db, products):
                 price=product[6],
                 stock=product[7],
                 sold_all_time=sold_all_time,
-                sold_thirty_days=sold_thirty_days,
+                sold_thirty_days=0,
                 sold_seven_days=sold_seven_days,
                 image=product[8],
                 run_number=run_number,
@@ -179,7 +179,7 @@ def calculate_product_all_time_sold(db, product):
     return 0  # If no product entry in the database, return 0
 
 
-def calculate_product_timeperiod_sold(db, product, days):
+def calculate_product_timeperiod_sold(db, product, sold_by_current_date, days):
     """
     Calculates how many times the product has been sold in the specified time period.
 
@@ -193,20 +193,13 @@ def calculate_product_timeperiod_sold(db, product, days):
     """
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
-        last_product_entry = product_entries_db[-1]
-        print(f"PRODUCT NAME: {last_product_entry.product_name}")
-        end_date = last_product_entry.time_created.date()
-        print(f"END DATE: {end_date}")
-
-        start_date = end_date - timedelta(days)
+        start_date = date.today() - timedelta(days)
         print(f"START DATE: {start_date}")
-        end_date_sold = last_product_entry.sold_all_time
-        print(end_date_sold)
         sold_in_days = 0
         for element in product_entries_db:
             if element.time_created.date() == start_date:
                 start_date_sold = element.sold_all_time
-                sold_in_days = end_date_sold - start_date_sold
+                sold_in_days = sold_by_current_date - start_date_sold
                 print(f"SOLD IN DAYS: {sold_in_days}")
                 return sold_in_days
     return 0
