@@ -109,13 +109,11 @@ def write_products_to_db(db, products):
                 db, product
             )  # Times product has been sold
             sold_seven_days = calculate_product_timeperiod_sold(
-                db, product, sold_all_time, 7
+                db, product, sold_all_time, 6
             )  # Times product has been sold in 7 days
-            """
             sold_thirty_days = calculate_product_timeperiod_sold(
-                db, product, 30
+                db, product, sold_all_time, 29
             )  # Times product has been sold in 30 days
-            """
             product_row = Product(
                 product_id=product[0],
                 product_name=product[1],
@@ -126,7 +124,7 @@ def write_products_to_db(db, products):
                 price=product[6],
                 stock=product[7],
                 sold_all_time=sold_all_time,
-                sold_thirty_days=0,
+                sold_thirty_days=sold_thirty_days,
                 sold_seven_days=sold_seven_days,
                 image=product[8],
                 run_number=run_number,

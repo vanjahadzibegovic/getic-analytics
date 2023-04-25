@@ -16,6 +16,7 @@ from main.calculate_stats import (
     map_category,
     map_sort,
 )
+from main.forms import SearchForm
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -47,6 +48,7 @@ def index():
         total_sold=total_sold,
         thirty_days_sold=thirty_days_sold,
         seven_days_sold=seven_days_sold,
+        form=SearchForm(),
     )
 
 
@@ -165,6 +167,7 @@ def categories(filter, sort):
         total_sold=total_sold,
         thirty_days_sold=thirty_days_sold,
         seven_days_sold=seven_days_sold,
+        form=SearchForm(),
     )
 
 
@@ -242,4 +245,44 @@ def brands(filter, sort):
         total_sold=total_sold,
         thirty_days_sold=thirty_days_sold,
         seven_days_sold=seven_days_sold,
+        form=SearchForm(),
     )
+
+
+@app.route("/search", methods=["POST"])
+def search():
+    form = SearchForm()
+    if form.validate_on_submit():
+        latest_run_number = calculate_current_run_number(db) - 1
+        latest_run_products = (
+            Product.query.filter(Product.run_number == latest_run_number)
+            .filter(Product.product_name.ilike(f"%{form.searched.data}%"))
+            .order_by(Product.sold_all_time.desc())
+        )
+        page = request.args.get("page", 1, type=int)
+        products_page = latest_run_products.paginate(page=page, per_page=78)
+        first_run_date = (
+            Product.query.filter(Product.run_number == 1).first().time_created.date()
+        )
+        total_products = calculate_total_items(latest_run_products)
+        total_sold = calculate_total_sold(latest_run_products)
+        thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
+        seven_days_sold = calculate_sold_seven_days(latest_run_products)
+        return render_template(
+            "index.html",
+            title="Dashboard",
+            base="categories",
+            product_type=form.searched.data,
+            sort_type=map_sort("total-highest"),
+            filter="all-products",
+            sort="total-highest",
+            products=products_page,
+            first_run_date=first_run_date,
+            total_products=total_products,
+            total_sold=total_sold,
+            thirty_days_sold=thirty_days_sold,
+            seven_days_sold=seven_days_sold,
+            form=SearchForm(),
+        )
+    else:
+        return form.errors
