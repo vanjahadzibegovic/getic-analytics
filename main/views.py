@@ -249,8 +249,13 @@ def brands(filter, sort):
     )
 
 
-@app.route("/search", methods=["POST"])
-def search():
+@app.route(
+    "/search/",
+    defaults={"sort": "total-highest", "product_type": None},
+    methods=["POST"],
+)
+@app.route("/search/<product_type>/<sort>/", methods=["GET"])
+def search(sort, product_type):
     form = SearchForm()
     if form.validate_on_submit():
         latest_run_number = calculate_current_run_number(db) - 1
@@ -259,30 +264,38 @@ def search():
             .filter(Product.product_name.ilike(f"%{form.searched.data}%"))
             .order_by(Product.sold_all_time.desc())
         )
-        page = request.args.get("page", 1, type=int)
-        products_page = latest_run_products.paginate(page=page, per_page=78)
-        first_run_date = (
-            Product.query.filter(Product.run_number == 1).first().time_created.date()
-        )
-        total_products = calculate_total_items(latest_run_products)
-        total_sold = calculate_total_sold(latest_run_products)
-        thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
-        seven_days_sold = calculate_sold_seven_days(latest_run_products)
-        return render_template(
-            "index.html",
-            title="Dashboard",
-            base="categories",
-            product_type=form.searched.data,
-            sort_type=map_sort("total-highest"),
-            filter="all-products",
-            sort="total-highest",
-            products=products_page,
-            first_run_date=first_run_date,
-            total_products=total_products,
-            total_sold=total_sold,
-            thirty_days_sold=thirty_days_sold,
-            seven_days_sold=seven_days_sold,
-            form=SearchForm(),
-        )
+        product_type = form.searched.data
     else:
-        return form.errors
+        if sort == "total-lowest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_all_time.asc())
+            )
+    page = request.args.get("page", 1, type=int)
+    products_page = latest_run_products.paginate(page=page, per_page=78)
+    first_run_date = (
+        Product.query.filter(Product.run_number == 1).first().time_created.date()
+    )
+    total_products = calculate_total_items(latest_run_products)
+    total_sold = calculate_total_sold(latest_run_products)
+    thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
+    seven_days_sold = calculate_sold_seven_days(latest_run_products)
+    return render_template(
+        "search.html",
+        title="Dashboard",
+        base="categories",
+        product_type=product_type,
+        sort_type=map_sort(sort),
+        sort=sort,
+        products=products_page,
+        first_run_date=first_run_date,
+        total_products=total_products,
+        total_sold=total_sold,
+        thirty_days_sold=thirty_days_sold,
+        seven_days_sold=seven_days_sold,
+        form=SearchForm(),
+    )
+
+    #    return form.errors

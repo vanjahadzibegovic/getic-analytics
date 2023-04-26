@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Getic Analytics - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/styles/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="/static/styles/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div>Getic Analytics</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <div class="nav-link">
+                    <span>Tracking since: {{ first_run_date }}</span>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Filter by:
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBrands"
+                    aria-expanded="true" aria-controls="collapseBrands">
+                    <span>Brand</span>
+                </a>
+                <div id="collapseBrands" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/">All Brands</a>
+                        <a class="collapse-item" href="/brands/Teltonika/total-highest/">Teltonika</a>
+                        <a class="collapse-item" href="/brands/AXON/total-highest/">AXON</a>
+                        <a class="collapse-item" href="/brands/Huawei/total-highest/">Huawei</a>
+                        <a class="collapse-item" href="/brands/HikVision/total-highest/">HikVision</a>
+                        <a class="collapse-item" href="/brands/Iskra/total-highest/">Iskra</a>
+                        <a class="collapse-item" href="/brands/ZTE/total-highest/">ZTE</a>
+                        <a class="collapse-item" href="/brands/Milesight/total-highest/">Milesight</a>
+                        <a class="collapse-item" href="/brands/MikroTik/total-highest/">MikroTik</a>
+                        <a class="collapse-item" href="/brands/IMILAB/total-highest/">IMILAB</a>
+                        <a class="collapse-item" href="/brands/EFB-ELEKTRONIK/total-highest/">EFB-ELEKTRONIK</a>
+                        <a class="collapse-item" href="/brands/Western Digital/total-highest/">Western Digital</a>
+                        <a class="collapse-item" href="/brands/QuWireless/total-highest/">QuWireless</a>
+                        <a class="collapse-item" href="/brands/Ubiquiti/total-highest/">Ubiquiti</a>
+                        <a class="collapse-item" href="/brands/AmpliFi/total-highest/">AmpliFi</a>
+                        <a class="collapse-item" href="/brands/OEM/total-highest/">OEM</a>
+                        <a class="collapse-item" href="/brands/Haylou/total-highest/">Haylou</a>
+                        <a class="collapse-item" href="/brands/Mimosa/total-highest/">Mimosa</a>
+                        <a class="collapse-item" href="/brands/Alcatel/total-highest/">Alcatel</a>
+                        <a class="collapse-item" href="/brands/Jirous/total-highest/">Jirous</a>
+                        <a class="collapse-item" href="/brands/RF Elements/total-highest/">RF Elements</a>
+                        <a class="collapse-item" href="/brands/Cambium/total-highest/">Cambium</a>
+                        <a class="collapse-item" href="/brands/Xiaomi/total-highest/">Xiaomi</a>
+                        <a class="collapse-item" href="/brands/Quectel/total-highest/">Quectel</a>
+                        <a class="collapse-item" href="/brands/Alfa Network/total-highest/">Alfa Network</a>
+                        <a class="collapse-item" href="/brands/Ruijie/total-highest/">Ruijie</a>
+                        <a class="collapse-item" href="/brands/Zyxel/total-highest/">Zyxel</a>
+                        <a class="collapse-item" href="/brands/Stalflex/total-highest/">Stalflex</a>
+                        <a class="collapse-item" href="/brands/Samsung/total-highest/">Samsung</a>
+                        <a class="collapse-item" href="/brands/Seagate/total-highest/">Seagate</a>
+                        <a class="collapse-item" href="/brands/Cyberteam/total-highest/">Cyberteam</a>
+                        <a class="collapse-item" href="/brands/Vention/total-highest/">Vention</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
+                    aria-expanded="true" aria-controls="collapseCategories">
+                    <span>Category</span>
+                </a>
+                <div id="collapseCategories" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/">All Categories</a>
+                        <a class="collapse-item" href="/categories/outdoor-wireless/total-highest/">Outdoor Wireless</a>
+                        <a class="collapse-item" href="/categories/home-office-networks/total-highest/">Home and Office
+                            Networks</a>
+                        <a class="collapse-item" href="/categories/lte-products/total-highest/">LTE Products</a>
+                        <a class="collapse-item" href="/categories/fiber-networks/total-highest/">Fiber Networks</a>
+                        <a class="collapse-item" href="/categories/security-systems/total-highest/">Security Systems</a>
+                        <a class="collapse-item" href="/categories/iot-products/total-highest/">IoT Solutions</a>
+                        <a class="collapse-item" href="/categories/fleet-management/total-highest/">Fleet Management</a>
+                        <a class="collapse-item" href="/categories/cables-and-cabinets/total-highest/">Cables and
+                            Cabinets</a>
+                        <a class="collapse-item" href="/categories/electrical-equipment/total-highest/">Electrical
+                            Equipment</a>
+                        <a class="collapse-item" href="/categories/mounts-and-brackets/total-highest/">Mounts and
+                            Brackets</a>
+                        <a class="collapse-item" href="/categories/gadgets/total-highest/">Gadgets</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sort by:
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#CollapseSold"
+                    aria-expanded="true" aria-controls="collapseSold">
+                    <span>Number Sold</span>
+                </a>
+                <div id="CollapseSold" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/search/total-highest/">Most Sold - All Time</a>
+                        <a class="collapse-item" href="/search/{{ product_type }}/total-lowest/">Least Sold - All
+                            Time</a>
+                        <a class="collapse-item" href="/search/thirty-days-highest/">Most Sold - 30
+                            Days</a>
+                        <a class="collapse-item" href="/search/thirty-days-lowest/">Least Sold - 30
+                            Days</a>
+                        <a class="collapse-item" href="/search/seven-days-highest/">Most Sold - 7
+                            Days</a>
+                        <a class="collapse-item" href="/search/seven-days-lowest/">Least Sold - 7
+                            Days</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#CollapsePrice"
+                    aria-expanded="true" aria-controls="collapsePrice">
+                    <span>Price</span>
+                </a>
+                <div id="CollapsePrice" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/search/price-highest/">Most Expensive</a>
+                        <a class="collapse-item" href="/search/price-lowest/">Least Expensive</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form method="POST" action="{{ url_for('search') }}"
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        {{ form.hidden_tag() }}
+                        <div class="input-group">
+                            <input type="search" class="form-control bg-light border-0 small" name="searched"
+                                placeholder="Search items..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800 ml-1"><b>{{ product_type }}</b></h1>
+                    </div>
+
+
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Total Items Card -->
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Items</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_products }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Items Sold (Total) -->
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Items Sold (Total)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_sold }}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item Sold (30 Days) -->
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Items Sold (30 Days)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ thirty_days_sold }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Items Sold (7 Days) -->
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Items Sold (7 Days)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ seven_days_sold }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-4 ml-1">
+                        <h1 class="h5 mb-0 text-gray-800"><b>Products ({{ sort_type }}):</b></h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        {% set count=0 %}
+                        {% for product in products %}
+                        {% if count == 6 %}
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-2 col-md-6 my-2" style="border: none;">
+                            <!-- Basic Card Example -->
+                            <div class="card">
+                                <img class="card-img-top" src="/static/img/{{ product.product_id }}.jpg"
+                                    alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name.decode() }}</h5>
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 7 days: {{
+                                        product.sold_seven_days }}<br>Sold in 30 days: {{
+                                        product.sold_thirty_days }}<br>Total
+                                        sold: {{ product.sold_all_time }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% set count=0 %}
+                        {% set count = count + 1 %}
+                        {% else %}
+                        <div class="col-xl-2 col-md-6 my-2" style="border: none;">
+                            <!-- Basic Card Example -->
+                            <div class="card">
+                                <img class="card-img-top" src="/static/img/{{ product.product_id }}.jpg"
+                                    alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.product_name }}</h5>
+                                    <p class="card-text">Price: {{ product.price }} €<br>Sold in 7 days: {{
+                                        product.sold_seven_days
+                                        }}<br>Sold in 30 days: {{
+                                        product.sold_thirty_days }}<br>Total
+                                        sold: {{ product.sold_all_time }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% set count = count + 1 %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    {% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)
+                    %}
+                    {% if page_num %}
+                    {% if products.page == page_num %}
+                    <a class="btn btn-info mb-4" href="{{ url_for(base, filter=filter, sort=sort, page=page_num) }}">{{
+                        page_num }}</a>
+                    {% else %}
+                    <a class="btn btn-outline-info mb-4"
+                        href="{{ url_for(base, filter=filter, sort=sort, page=page_num) }}">{{
+                        page_num
+                        }}</a>
+                    {% endif %}
+                    {% else %}
+                    ...
+                    {% endif %}
+                    {% endfor %}
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your
+                    current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
