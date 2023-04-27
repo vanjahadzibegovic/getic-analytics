@@ -266,12 +266,61 @@ def search(sort, product_type):
         )
         product_type = form.searched.data
     else:
-        if sort == "total-lowest":
+        if sort == "total-highest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_all_time.desc())
+            )
+        elif sort == "total-lowest":
             latest_run_number = calculate_current_run_number(db) - 1
             latest_run_products = (
                 Product.query.filter(Product.run_number == latest_run_number)
                 .filter(Product.product_name.ilike(f"%{product_type}%"))
                 .order_by(Product.sold_all_time.asc())
+            )
+        elif sort == "seven-days-highest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_seven_days.desc())
+            )
+        elif sort == "seven-days-lowest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_seven_days.asc())
+            )
+        elif sort == "thirty-days-highest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_thirty_days.desc())
+            )
+        elif sort == "thirty-days-lowest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.sold_thirty_days.asc())
+            )
+        elif sort == "price-highest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.price.desc())
+            )
+        elif sort == "price-lowest":
+            latest_run_number = calculate_current_run_number(db) - 1
+            latest_run_products = (
+                Product.query.filter(Product.run_number == latest_run_number)
+                .filter(Product.product_name.ilike(f"%{product_type}%"))
+                .order_by(Product.price.asc())
             )
     page = request.args.get("page", 1, type=int)
     products_page = latest_run_products.paginate(page=page, per_page=78)
@@ -297,5 +346,3 @@ def search(sort, product_type):
         seven_days_sold=seven_days_sold,
         form=SearchForm(),
     )
-
-    #    return form.errors

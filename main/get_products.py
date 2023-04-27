@@ -192,13 +192,11 @@ def calculate_product_timeperiod_sold(db, product, sold_by_current_date, days):
     product_entries_db = Product.query.filter(Product.product_id == product[0]).all()
     if product_entries_db:
         start_date = date.today() - timedelta(days)
-        print(f"START DATE: {start_date}")
         sold_in_days = 0
         for element in product_entries_db:
             if element.time_created.date() == start_date:
                 start_date_sold = element.sold_all_time
                 sold_in_days = sold_by_current_date - start_date_sold
-                print(f"SOLD IN DAYS: {sold_in_days}")
                 return sold_in_days
     return 0
 
