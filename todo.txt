@@ -1,12 +1,7 @@
-- Dodati komentare na nove funkcije (sortiranje) - ok
-- Dodati mogucnost izbora scrapeanja sa ili bez proxyja - ok
-- Dodati total products sold 30 i 7 days (gornji dashboard) - ok
-- Dodati sort za Most/Least Sold - 7 Days i 30 Days - ok
-- Dodati info za first scrape datum - ok
+- Fix Search on mobile
+- Authentication
+- CSRF
+- Pocistit HTML
 
 - Analizirati Getic JSON
-- Opet skinut sve slike
-- Opet namjestiti scheduler
-- Disable hide navbar on scroll option
-- Search
-- Authentication
+
