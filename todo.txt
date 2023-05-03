@@ -1,7 +1,7 @@
-- Fix Search on mobile
-- Authentication
+- Authentication i Log Out
 - CSRF
 - Pocistit HTML
+- Srediti template (extends)
 
 - Analizirati Getic JSON
 

@@ -334,7 +334,7 @@ def search(sort, product_type):
     return render_template(
         "search.html",
         title="Dashboard",
-        base="search",
+        base="categories",
         product_type=product_type,
         sort_type=map_sort(sort),
         sort=sort,

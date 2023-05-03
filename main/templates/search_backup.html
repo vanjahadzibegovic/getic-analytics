@@ -391,12 +391,11 @@
                     %}
                     {% if page_num %}
                     {% if products.page == page_num %}
-                    <a class="btn btn-info mb-4"
-                        href="{{ url_for(base, product_type=product_type, sort=sort, page=page_num) }}">{{
+                    <a class="btn btn-info mb-4" href="{{ url_for(base, filter=filter, sort=sort, page=page_num) }}">{{
                         page_num }}</a>
                     {% else %}
                     <a class="btn btn-outline-info mb-4"
-                        href="{{ url_for(base, product_type=product_type, sort=sort, page=page_num) }}">{{
+                        href="{{ url_for(base, filter=filter, sort=sort, page=page_num) }}">{{
                         page_num
                         }}</a>
                     {% endif %}
