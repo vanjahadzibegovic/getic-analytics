@@ -71,7 +71,14 @@ def request_products_from_api(proxies=None):
                         product_name = product["title"]
                         brand = product["brand"]
                         price = str(product["prices"][0]["prices"][0]["price"])
-                        stock = str(product["expectedAmount"])
+                        try:
+                            amounts = product["amounts"]
+                            for element in amounts:
+                                if element["conditionId"] == "000000001":
+                                    stock = element["amount"]
+                                    break
+                        except:
+                            stock = 0
                         image = f'https://www.getic.com{product["images"][0]["variants"][0]["path"]}'
                         product_id = str(product["id"])
                         products.append(
@@ -89,7 +96,7 @@ def request_products_from_api(proxies=None):
                         )
             break
         except:
-            print("Error, looking for another proxy")
+            print("Error, unable to request the data.")
     return products
 
 
