@@ -33,7 +33,7 @@ def request_products_from_api(proxies=None):
         Returns:
                 products (list): Contains data about each product
     """
-
+    """
     categories = [
         "outdoor-wireless",
         "home-office-networks",
@@ -47,6 +47,9 @@ def request_products_from_api(proxies=None):
         "mounts-and-brackets",
         "gadgets",
     ]
+    """
+
+    categories = ["outdoor-wireless"]
     products = []
     while True:
         try:
@@ -71,14 +74,12 @@ def request_products_from_api(proxies=None):
                         product_name = product["title"]
                         brand = product["brand"]
                         price = str(product["prices"][0]["prices"][0]["price"])
-                        try:
-                            amounts = product["amounts"]
-                            for element in amounts:
-                                if element["conditionId"] == "000000001":
-                                    stock = element["amount"]
-                                    break
-                        except:
-                            stock = 0
+                        amounts = product["amounts"]
+                        stock = 0
+                        for element in amounts:
+                            if element["conditionId"] == "000000001":
+                                stock = element["amount"]
+                                break
                         image = f'https://www.getic.com{product["images"][0]["variants"][0]["path"]}'
                         product_id = str(product["id"])
                         products.append(
