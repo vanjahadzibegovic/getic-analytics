@@ -19,7 +19,7 @@ def update_products():
 
 
 # Schedules product data to be updated each day at the specified time
-scheduler.add_job(update_products, "cron", timezone="utc", hour="8")
+scheduler.add_job(update_products, "cron", timezone="utc", hour="21", minute="35")
 scheduler.start()
 
 if __name__ == "__main__":

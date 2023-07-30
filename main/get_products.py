@@ -33,7 +33,7 @@ def request_products_from_api(proxies=None):
         Returns:
                 products (list): Contains data about each product
     """
-    """
+    
     categories = [
         "outdoor-wireless",
         "home-office-networks",
@@ -47,9 +47,7 @@ def request_products_from_api(proxies=None):
         "mounts-and-brackets",
         "gadgets",
     ]
-    """
-
-    categories = ["outdoor-wireless"]
+     
     products = []
     while True:
         try:
