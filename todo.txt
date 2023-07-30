@@ -1,9 +1,0 @@
-- Dodati wtforms i flask_wtf u requirements files
-
-- Authentication i Log Out
-- CSRF
-- Pocistit HTML
-- Srediti template (extends)
-
-- Analizirati Getic JSON
-
