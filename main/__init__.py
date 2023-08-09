@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 from apscheduler.schedulers.background import BackgroundScheduler
 import os
 
@@ -11,7 +13,8 @@ app.config[
 ] = "postgresql://postgres:smitSmece@localhost/getic_analytics_new"
 app.config["SECRET_KEY"] = os.urandom(32)
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
 scheduler = BackgroundScheduler(daemon=True)
-# bcrypt = Bcrypt(app)
 
 from main import views

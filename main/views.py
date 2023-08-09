@@ -1,6 +1,7 @@
-from flask import render_template, request
-from main import app, db
-from main.models import Product
+from flask import render_template, request, redirect, url_for, flash
+from main import app, db, bcrypt
+from flask_login import login_user
+from main.models import Product, User
 from main.get_products import (
     request_products_from_api,
     write_products_to_db,
@@ -16,7 +17,20 @@ from main.calculate_stats import (
     map_category,
     map_sort,
 )
-from main.forms import SearchForm
+from main.forms import SearchForm, LoginForm
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
+            return redirect(url_for("index"))
+        else:
+            flash("Login Unsuccesful. Please check email and password.", "danger")
+    return render_template("login_test.html", title="Login", form=form)
 
 
 @app.route("/", methods=["GET", "POST"])
