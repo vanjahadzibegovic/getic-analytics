@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash
 from main import app, db, bcrypt
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user
 from main.models import Product, User
 from main.get_products import (
     request_products_from_api,
@@ -20,24 +20,21 @@ from main.calculate_stats import (
 from main.forms import SearchForm, LoginForm
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for("main"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for("main"))
+            return redirect(url_for("index"))
         else:
             flash("Login unsuccesful. Please check email and password.", "danger")
-    return render_template("login.html", title="Login", form=form)
+    return render_template("login_test.html", title="Login", form=form)
 
 
-@app.route("/main", methods=["GET", "POST"])
-@login_required
-def main():
+@app.route("/", methods=["GET", "POST"])
+def index():
     latest_run_number = calculate_current_run_number(db) - 1
     latest_run_products = Product.query.filter(
         Product.run_number == latest_run_number
@@ -52,7 +49,7 @@ def main():
     thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
     seven_days_sold = calculate_sold_seven_days(latest_run_products)
     return render_template(
-        "main.html",
+        "index.html",
         title="Dashboard",
         base="categories",
         product_type=map_category("all-products"),
@@ -70,7 +67,6 @@ def main():
 
 
 @app.route("/categories/<filter>/<sort>/", methods=["GET", "POST"])
-@login_required
 def categories(filter, sort):
     latest_run_number = calculate_current_run_number(db) - 1
     if sort == "total-lowest":
@@ -172,7 +168,7 @@ def categories(filter, sort):
     thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
     seven_days_sold = calculate_sold_seven_days(latest_run_products)
     return render_template(
-        "main.html",
+        "index.html",
         title="Dashboard",
         base="categories",
         product_type=map_category(filter),
@@ -190,7 +186,6 @@ def categories(filter, sort):
 
 
 @app.route("/brands/<filter>/<sort>/", methods=["GET", "POST"])
-@login_required
 def brands(filter, sort):
     latest_run_number = calculate_current_run_number(db) - 1
     if sort == "total-lowest":
@@ -251,7 +246,7 @@ def brands(filter, sort):
     thirty_days_sold = calculate_sold_thirty_days(latest_run_products)
     seven_days_sold = calculate_sold_seven_days(latest_run_products)
     return render_template(
-        "main.html",
+        "index.html",
         title="Dashboard",
         base="brands",
         product_type=filter,
@@ -274,7 +269,6 @@ def brands(filter, sort):
     methods=["POST"],
 )
 @app.route("/search/<product_type>/<sort>/", methods=["GET"])
-@login_required
 def search(sort, product_type):
     form = SearchForm()
     if form.validate_on_submit():
