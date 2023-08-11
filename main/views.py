@@ -1,6 +1,11 @@
 from flask import render_template, request, redirect, url_for, flash
 from main import app, db, bcrypt
-from flask_login import login_user, login_required, current_user
+from flask_login import (
+    login_user,
+    login_required,
+    current_user,
+    logout_user,
+)
 from main.models import Product, User
 from main.get_products import (
     request_products_from_api,
@@ -33,6 +38,13 @@ def login():
         else:
             flash("Login unsuccesful. Please check email and password.", "danger")
     return render_template("login.html", title="Login", form=form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 
 
 @app.route("/main", methods=["GET", "POST"])
