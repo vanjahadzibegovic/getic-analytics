@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
-from main import app, db, bcrypt
+from main import app, db, bcrypt, mail
 from flask_login import (
     login_user,
     login_required,
@@ -22,7 +22,8 @@ from main.calculate_stats import (
     map_category,
     map_sort,
 )
-from main.forms import SearchForm, LoginForm
+from main.forms import SearchForm, LoginForm, RequestResetForm, ResetPasswordForm
+from flask_mail import Message
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -33,7 +34,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
+            login_user(user, remember=form.remember.data)
             return redirect(url_for("main"))
         else:
             flash("Login unsuccesful. Please check email and password.", "danger")
@@ -47,6 +48,66 @@ def logout():
     return redirect(url_for("login"))
 
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message(
+        "Password Reset Request",
+        sender="getic_analytics@zohomail.eu",
+        recipients=[user.email],
+    )
+    msg.body = f"""To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}.
+
+If you did not make this request then simply ignore this email and no changes will be made.
+"""
+    mail.send(msg)
+    return msg.body
+
+
+@app.route("/reset_password", methods=["GET", "POST"])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("main"))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None:
+            flash(
+                "You have entered an invalid email address. Please try again.",
+                "warning",
+            )
+            return redirect(url_for("reset_request"))
+        send_reset_email(user)
+        flash(
+            "An email has been sent with instructions to reset your password.", "info"
+        )
+        return redirect(url_for("login"))
+    return render_template("reset_request.html", title="Reset Password", form=form)
+
+
+@app.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for("main"))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash("Token has expired. Please request password reset again.", "warning")
+        return redirect(url_for("login"))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        if form.password.data != form.confirm_password.data:
+            flash("Passwords do not match. Please try again.", "warning")
+            return redirect(url_for("reset_token", token=token))
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
+        user.password = hashed_password
+        db.session.commit()
+        flash("Your password has been updated! You are now able to log in.", "success")
+        return redirect(url_for("login"))
+    return render_template("reset_token.html", title="Reset Password", form=form)
+
+
 @app.route("/main", methods=["GET", "POST"])
 @login_required
 def main():
@@ -55,7 +116,7 @@ def main():
         Product.run_number == latest_run_number
     ).order_by(Product.sold_all_time.desc())
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=78)
+    products_page = latest_run_products.paginate(page=page, per_page=66)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -175,7 +236,7 @@ def categories(filter, sort):
             ).order_by(Product.sold_all_time.desc())
 
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=78)
+    products_page = latest_run_products.paginate(page=page, per_page=66)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -254,7 +315,7 @@ def brands(filter, sort):
             .order_by(Product.sold_all_time.desc())
         )
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=78)
+    products_page = latest_run_products.paginate(page=page, per_page=66)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -355,7 +416,7 @@ def search(sort, product_type):
                 .order_by(Product.price.asc())
             )
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=78)
+    products_page = latest_run_products.paginate(page=page, per_page=66)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
