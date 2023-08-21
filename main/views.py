@@ -116,7 +116,7 @@ def main():
         Product.run_number == latest_run_number
     ).order_by(Product.sold_all_time.desc())
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=66)
+    products_page = latest_run_products.paginate(page=page, per_page=72)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -236,7 +236,7 @@ def categories(filter, sort):
             ).order_by(Product.sold_all_time.desc())
 
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=66)
+    products_page = latest_run_products.paginate(page=page, per_page=72)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -315,7 +315,7 @@ def brands(filter, sort):
             .order_by(Product.sold_all_time.desc())
         )
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=66)
+    products_page = latest_run_products.paginate(page=page, per_page=72)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
@@ -416,7 +416,7 @@ def search(sort, product_type):
                 .order_by(Product.price.asc())
             )
     page = request.args.get("page", 1, type=int)
-    products_page = latest_run_products.paginate(page=page, per_page=66)
+    products_page = latest_run_products.paginate(page=page, per_page=72)
     first_run_date = (
         Product.query.filter(Product.run_number == 1).first().time_created.date()
     )
